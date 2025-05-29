@@ -39,3 +39,25 @@ SELECT dbo.GetStudentDeptartmentName(1)
 ```
 ------------------
 
+### Error 2:  Restore the Database from Backup Files task (Drop the Current Database) 
+
+Msg 3702, Level 16, State 4, Line 149
+Cannot drop database "TrainingDB" because it is currently in use.
+
+
+### Solution:
+
+#### Set the database to single-user mode and rollback active connections
+ 
+```sql
+
+ALTER DATABASE TrainingDB SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+
+```
+
+#### Then ,Now drop the database
+```sql
+DROP DATABASE TrainingDB;
+
+
+```
