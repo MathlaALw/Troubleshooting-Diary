@@ -72,10 +72,12 @@ The ORDER BY clause is invalid in views, inline functions, derived tables, subqu
 
 ### Solution:
 ```sql
+
 CREATE VIEW ViewAvailableBooks AS
-SELECT Genre,Title,Price,Shelf_Location FROM Book
+SELECT Genre, Title, Shelf_Location,Price
+FROM Book
 WHERE Available_State = 'TRUE'
-GROUP BY Genre
+
 
 
 ```
@@ -83,8 +85,28 @@ GROUP BY Genre
 ```sql
 
 SELECT * FROM ViewAvailableBooks
-ORDER BY Price;
+ORDER BY Price , Genre;
+
 ```
-NOTE:
+|
+~~NOTE:~~
 **SQL Server** does not allow ORDER BY in a view unless you use it with TOP, OFFSET, or FOR XML.
+
+-----
+
+
+### Error 4: ViewAvailableBooks  ->  Available books grouped by genre, ordered by price - FROM LIBRARY PROJECT PART 2 - VIEW.SQL FILE
+
+Msg 8120, Level 16, State 1, Procedure ViewAvailableBooks, Line 3 [Batch Start Line 26]
+Column 'Book.Title' is invalid in the select list because it is not contained in either an aggregate function or the GROUP BY clause.
+**PROBLEM CODE:**
+```sql
+CREATE VIEW ViewAvailableBooks AS
+SELECT Genre,Title,Price,Shelf_Location FROM Book
+WHERE Available_State = 'TRUE'
+GROUP BY Genre
+
+SELECT * FROM ViewAvailableBooks
+ORDER BY Price , Genre;
+```
 
