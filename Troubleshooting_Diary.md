@@ -61,3 +61,66 @@ DROP DATABASE TrainingDB;
 
 
 ```
+
+----------------
+
+### Error 3: ViewAvailableBooks  ->  Available books grouped by genre, ordered by price - FROM LIBRARY PROJECT PART 2 - VIEW.SQL FILE
+
+
+Msg 1033, Level 15, State 1, Procedure ViewAvailableBooks, Line 5 [Batch Start Line 27]
+The ORDER BY clause is invalid in views, inline functions, derived tables, subqueries, and common table expressions, unless TOP, OFFSET or FOR XML is also specified.
+
+### Solution:
+```sql
+
+CREATE VIEW ViewAvailableBooks AS
+SELECT Genre, Title, Shelf_Location,Price
+FROM Book
+WHERE Available_State = 'TRUE'
+
+
+
+```
+**Then:**
+```sql
+
+SELECT * FROM ViewAvailableBooks
+ORDER BY Price , Genre;
+
+```
+|
+~~NOTE:~~
+**SQL Server** does not allow ORDER BY in a view unless you use it with TOP, OFFSET, or FOR XML.
+
+-----
+
+
+### Error 4: ViewAvailableBooks  ->  Available books grouped by genre, ordered by price - FROM LIBRARY PROJECT PART 2 - VIEW.SQL FILE
+
+Msg 8120, Level 16, State 1, Procedure ViewAvailableBooks, Line 3 [Batch Start Line 26]
+Column 'Book.Title' is invalid in the select list because it is not contained in either an aggregate function or the GROUP BY clause.
+
+**SOLUTION CODE:**
+
+```sql
+CREATE VIEW ViewAvailableBooks AS
+SELECT Genre,Title,Price,Shelf_Location FROM Book
+WHERE Available_State = 'TRUE'
+GROUP BY Genre
+
+SELECT * FROM ViewAvailableBooks
+ORDER BY Price , Genre;
+```
+
+-----
+
+### Error 5: Function fn_ListAvailableBooksByLibrary ->  List of available books by library - FROM LIBRARY PROJECT PART 2 - FUNCTION.SQL FILE
+Msg 4121, Level 16, State 1, Line 133
+Cannot find either column "dbo" or the user-defined function or aggregate "dbo.fn_ListAvailableBooksByLibrary", or the name is ambiguous.
+
+### Solution:
+```sql
+SELECT * 
+FROM sys.objects 
+WHERE name = 'fn_ListAvailableBooksByLibrary';
+```
