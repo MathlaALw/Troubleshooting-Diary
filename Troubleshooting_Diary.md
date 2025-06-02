@@ -112,4 +112,15 @@ SELECT * FROM ViewAvailableBooks
 ORDER BY Price , Genre;
 ```
 
+-----
 
+### Error 5: Function fn_ListAvailableBooksByLibrary ->  List of available books by library - FROM LIBRARY PROJECT PART 2 - FUNCTION.SQL FILE
+Msg 4121, Level 16, State 1, Line 133
+Cannot find either column "dbo" or the user-defined function or aggregate "dbo.fn_ListAvailableBooksByLibrary", or the name is ambiguous.
+
+### Solution:
+```sql
+SELECT * 
+FROM sys.objects 
+WHERE name = 'fn_ListAvailableBooksByLibrary';
+```
