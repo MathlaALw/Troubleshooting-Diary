@@ -99,7 +99,9 @@ ORDER BY Price , Genre;
 
 Msg 8120, Level 16, State 1, Procedure ViewAvailableBooks, Line 3 [Batch Start Line 26]
 Column 'Book.Title' is invalid in the select list because it is not contained in either an aggregate function or the GROUP BY clause.
-**PROBLEM CODE:**
+
+**SOLUTION CODE:**
+
 ```sql
 CREATE VIEW ViewAvailableBooks AS
 SELECT Genre,Title,Price,Shelf_Location FROM Book
@@ -109,4 +111,5 @@ GROUP BY Genre
 SELECT * FROM ViewAvailableBooks
 ORDER BY Price , Genre;
 ```
+
 
